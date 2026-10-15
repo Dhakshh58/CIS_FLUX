@@ -21,6 +21,7 @@ REQUIRED_COLUMNS = [
     "usage-index",
 ]
 OUTPUT_COLUMNS = REQUIRED_COLUMNS + [
+    "budget indicator",
     "baseline-count",
     "baseline-mean",
     "baseline-stddev",
@@ -104,6 +105,7 @@ def main() -> None:
         ]
 
         result = {column: row[column] for column in REQUIRED_COLUMNS}
+        result["budget indicator"] = row.get("budget indicator", "")
         result["baseline-count"] = str(len(matching))
         if len(matching) < args.min_history:
             result.update({
